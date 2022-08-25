@@ -1,26 +1,28 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Carousel from '../components/Carousel.svelte';
+import Layout from "../layouts/Layout.astro";
+import Carousel from "../components/Carousel.svelte";
+
+const { NASA_API } = import.meta.env;
 
 type Image = {
-  title: string;
-  explanation: string;
-  media_type: 'image' | 'video';
-  /** Date published in YYYY-MM-DD format */
-  date: string;
-  /** Video URL or standard resolution image URL */
-  url: string;
-  /** High-res image URL (for media_type: 'image' only) */
-  hdurl?: string;
-  /** API version. Defaults to "v1" */
-  service_version: string;
-}
+	title: string;
+	explanation: string;
+	media_type: "image" | "video";
+	/** Date published in YYYY-MM-DD format */
+	date: string;
+	/** Video URL or standard resolution image URL */
+	url: string;
+	/** High-res image URL (for media_type: 'image' only) */
+	hdurl?: string;
+	/** API version. Defaults to "v1" */
+	service_version: string;
+};
 
 const images: Image[] = await fetch(
-  `https://api.nasa.gov/planetary/apod?api_key=WXsayjFXQxfVCR6KtzBn86fjdBeYLpZNwoGEZhHx&count=10`
-).then(res => res.json());
+	`https://api.nasa.gov/planetary/apod?api_key=${NASA_API}&count=10`
+).then((res) => res.json());
 
-console.log(images)
+console.log(images);
 ---
 
 <Layout title="Welcome to Astro.">

@@ -1,21 +1,28 @@
 ---
 // src/pages/[imageDate].astro
-import Layout from '../layouts/Layout.astro';
-import Image from '../components/Image.svelte';
+import Layout from "../layouts/Layout.astro";
+import Image from "../components/Image.svelte";
+
+const { NASA_API } = import.meta.env;
 
 const { imageDate } = Astro.params;
- const image = await fetch(
-   `https://api.nasa.gov/planetary/apod?api_key=WXsayjFXQxfVCR6KtzBn86fjdBeYLpZNwoGEZhHx&date=${imageDate}`
- ).then(res => res.json());
+const image = await fetch(
+  `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}&date=${imageDate}`
+).then((res) => res.json());
 ---
 
 <Layout title={image.title}>
   <main>
-   <h1>{image.title}</h1>
-   <Image title={image.title} url={image.url} alt={image.explanation} media_type={image.media_type}>
-    <p slot="figcaption">
-      {image.explanation}
-    </p>
+    <h1>{image.title}</h1>
+    <Image
+      title={image.title}
+      url={image.url}
+      alt={image.explanation}
+      media_type={image.media_type}
+    >
+      <p slot="figcaption">
+        {image.explanation}
+      </p>
     </Image>
   </main>
 </Layout>
