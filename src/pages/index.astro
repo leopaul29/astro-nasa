@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Image from '../components/Image.svelte'
+import Carousel from '../components/Carousel.svelte';
 
 type Image = {
   title: string;
@@ -26,12 +26,7 @@ console.log(images)
 <Layout title="Welcome to Astro.">
 	<main>
 		<h1>Welcome to <span class="text-gradient">Star Gazers</span></h1>
-		test:{images.length}
-		<ul>
-		{images.map((img) => {
-			return <Image title={img.title} url={img.url} />
-		})}
-		</ul>
+		<Carousel images={images} />
 	</main>
 </Layout>
 
