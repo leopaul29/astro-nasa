@@ -15,6 +15,9 @@ In this month's challenge, we’ll be building a [Star Gazer app that leverages 
 * [Netlify deployment on Astro side](https://docs.astro.build/en/guides/server-side-rendering/)
 * [Deployed on Netlify](https://main--adorable-lebkuchen-7d6b66.netlify.app/)
 
+## Environment variable
+set NASA_API env variable with your own NASA token or use DEMO_API for testing purpose.
+
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
