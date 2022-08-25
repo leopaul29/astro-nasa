@@ -1,8 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Image from '../components/Image.svelte'
 
-const images = await fetch(
-  `https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count=10`
+type Image = {
+  title: string;
+  explanation: string;
+  media_type: 'image' | 'video';
+  /** Date published in YYYY-MM-DD format */
+  date: string;
+  /** Video URL or standard resolution image URL */
+  url: string;
+  /** High-res image URL (for media_type: 'image' only) */
+  hdurl?: string;
+  /** API version. Defaults to "v1" */
+  service_version: string;
+}
+
+const images: Image[] = await fetch(
+  `https://api.nasa.gov/planetary/apod?api_key=WXsayjFXQxfVCR6KtzBn86fjdBeYLpZNwoGEZhHx&count=10`
 ).then(res => res.json());
 
 console.log(images)
@@ -11,6 +26,12 @@ console.log(images)
 <Layout title="Welcome to Astro.">
 	<main>
 		<h1>Welcome to <span class="text-gradient">Star Gazers</span></h1>
+		test:{images.length}
+		<ul>
+		{images.map((img) => {
+			return <Image title={img.title} url={img.url} />
+		})}
+		</ul>
 	</main>
 </Layout>
 
