@@ -26,7 +26,7 @@ console.log(images)
 <Layout title="Welcome to Astro.">
 	<main>
 		<h1>Welcome to <span class="text-gradient">Star Gazers</span></h1>
-		<Carousel images={images} />
+		<Carousel client:load images={images} />
 	</main>
 </Layout>
 

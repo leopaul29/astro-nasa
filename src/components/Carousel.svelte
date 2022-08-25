@@ -1,28 +1,42 @@
 <!--src/components/Carousel.svelte-->
 <script>
   import Image from './Image.svelte';
-  
+
   export let images = [];
-  </script>
+
+  let currentIdx = 0;
+  function next() {
+    currentIdx = (currentIdx + 1) % images.length;
+  }
+  function previous() {
+    if (currentIdx === 0) {
+      currentIdx = images.length - 1;
+    } else {
+      currentIdx -= 1;
+    }
+  }
+</script>
   
   <div class="buttons">
-    <button aria-label="Previous">
+  <button on:click={previous} aria-label="Previous">
       <!--left arrow icon-->
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--material-symbols" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><title>Previous</title><path fill="currentColor" d="m12.3 15.3l-2.6-2.6q-.15-.15-.225-.325Q9.4 12.2 9.4 12t.075-.375q.075-.175.225-.325l2.6-2.6q.475-.475 1.087-.212q.613.262.613.937v5.15q0 .675-.613.937q-.612.263-1.087-.212Z"></path></svg>
     </button>
     <h2>TODO: set this heading!</h2>
-    <button aria-label="Next">
+    <button on:click={next} aria-label="Next">
       <!--right arrow icon-->
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--material-symbols" width="32" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><title>Next</title><path fill="currentColor" d="M11.7 15.3q-.475.475-1.087.212Q10 15.25 10 14.575v-5.15q0-.675.613-.937q.612-.263 1.087.212l2.6 2.6q.15.15.225.325q.075.175.075.375t-.075.375q-.075.175-.225.325Z"></path></svg>
     </button>
   </div>
   <div class="images">
     {#each images as image, idx}
-      <div class="image-container">
-        <Image title={image.title} url={image.url} alt={image.explanation} media_type={image.media_type}>
-          <a slot="figcaption" href={`/${image.date}`}>Learn more</a>
-        </Image>
-      </div>
+      {#if idx === currentIdx}
+        <div class="image-container">
+          <Image title={image.title} url={image.url} alt={image.explanation} media_type={image.media_type}>
+            <a slot="figcaption" href={`/${image.date}`}>Learn more</a>
+          </Image>
+        </div>
+      {/if}
     {/each}
   </div>
   
